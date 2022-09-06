@@ -13,14 +13,15 @@ import javax.persistence.Id;
 public class Person {
 
     private String name;
+
     @Id
     private String identificador;
+
     @Enumerated(EnumType.STRING)
     private TipoIdentificador tipoIdentificador;
 
     public TipoIdentificador personVerification() {
-        int IdentificatorLenght = identificador.length();
-        switch (IdentificatorLenght) {
+        switch (identificador.length()) {
             case 11:
                 return tipoIdentificador = TipoIdentificador.CPF;
             case 14:
