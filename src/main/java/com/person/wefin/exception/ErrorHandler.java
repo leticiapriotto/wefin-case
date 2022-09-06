@@ -2,6 +2,7 @@ package com.person.wefin.exception;
 
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -31,6 +32,13 @@ public class ErrorHandler {
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ExceptionResponse methodNotAllowed(HttpRequestMethodNotSupportedException exception) {
         return new ExceptionResponse( HttpStatus.METHOD_NOT_ALLOWED.value(), "Esse metodo nao e permitido.");
+    }
+
+
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ExceptionResponse methodNotAllowed(HttpMessageNotReadableException exception) {
+        return new ExceptionResponse( HttpStatus.BAD_REQUEST.value(), "Nao e necessario informar o TipoIdentificador");
     }
 
 }
